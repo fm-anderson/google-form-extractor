@@ -1,48 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let currentPageUrl = "";
   document.getElementById("extract").addEventListener("click", async () => {
-    try {
-      let [tab] = await chrome.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-      if (tab && tab.url) {
-        currentPageUrl = tab.url.replace("viewform", "formResponse");
-        document.getElementById("copyAction").style.display = "block";
-      }
-
-      chrome.scripting.executeScript(
-        {
-          target: { tabId: tab.id },
-          function: extractEntryNames,
-        },
-        (injectionResults) => {
-          if (injectionResults && injectionResults.length > 0) {
-            updatePopupWithResults(injectionResults[0].result);
-          }
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: tab.id },
+        function: extractEntryNames,
+      },
+      (injectionResults) => {
+        if (injectionResults && injectionResults.length > 0) {
+          updatePopupWithResults(injectionResults[0].result);
         }
-      );
-    } catch (error) {
-      console.error("Error fetching active tab: ", error);
-    }
-  });
+      }
+    );
 
-  document.getElementById("copy").addEventListener("click", () => {
-    copyResultsToClipboard();
-  });
-
-  document.getElementById("copyAction").addEventListener("click", () => {
-    if (currentPageUrl) {
-      navigator.clipboard
-        .writeText(`action="${currentPageUrl}"`)
-        .then(() => {
-          console.log("Action URL copied to clipboard");
-        })
-        .catch((err) => {
-          console.error("Failed to copy action URL: ", err);
-        });
-    }
+    document.getElementById("copy").addEventListener("click", () => {
+      copyResultsToClipboard();
+    });
   });
 });
 
