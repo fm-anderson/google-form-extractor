@@ -2,7 +2,7 @@
 
 ## Description
 
-A Chrome extension that retrieves all the necessary data to connect a Google Form with any custom HTML form, streamlining the process of integrating Google Forms responses with your custom frontend solutions.
+A Chrome extension that retrieves all the necessary data to connect a Google Form with any custom HTML form, simplifying the process of integrating Google Forms responses with your custom frontend solutions.
 
 ## Features
 

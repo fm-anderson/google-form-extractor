@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Extracts entry names from Google Forms",
   "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://docs.google.com/forms/*viewform*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

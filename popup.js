@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let currentPageUrl = "";
   document.getElementById("extract").addEventListener("click", async () => {
     try {
       let [tab] = await chrome.tabs.query({
@@ -7,22 +6,44 @@ document.addEventListener("DOMContentLoaded", function () {
         currentWindow: true,
       });
 
-      if (tab && tab.url) {
-        currentPageUrl = tab.url.replace("viewform", "formResponse");
-        document.getElementById("copyAction").style.display = "block";
-      }
+      if (
+        tab.url.startsWith("https://docs.google.com/forms") &&
+        tab.url.includes("viewform")
+      ) {
+        let currentPageUrl = tab.url.replace("viewform", "formResponse");
 
-      chrome.scripting.executeScript(
-        {
-          target: { tabId: tab.id },
-          function: extractEntryNames,
-        },
-        (injectionResults) => {
-          if (injectionResults && injectionResults.length > 0) {
-            updatePopupWithResults(injectionResults[0].result);
+        document.getElementById("copyAction").style.display = "block";
+
+        chrome.scripting.executeScript(
+          {
+            target: { tabId: tab.id },
+            function: extractEntryNames,
+          },
+          (injectionResults) => {
+            if (injectionResults && injectionResults.length > 0) {
+              updatePopupWithResults(injectionResults[0].result);
+              document.getElementById("copy").style.display = "block";
+            }
           }
-        }
-      );
+        );
+
+        document.getElementById("copyAction").addEventListener("click", () => {
+          navigator.clipboard
+            .writeText(`action="${currentPageUrl}"`)
+            .then(() => {
+              console.log("Action URL copied to clipboard");
+            })
+            .catch((err) => {
+              console.error("Failed to copy action URL: ", err);
+            });
+        });
+      } else {
+        document.getElementById("extract").style.display = "none";
+        document.getElementById("copy").style.display = "none";
+        document.getElementById("copyAction").style.display = "none";
+        document.getElementById("isValidUrl").textContent =
+          "This extension only works with Google Forms";
+      }
     } catch (error) {
       console.error("Error fetching active tab: ", error);
     }
@@ -30,19 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("copy").addEventListener("click", () => {
     copyResultsToClipboard();
-  });
-
-  document.getElementById("copyAction").addEventListener("click", () => {
-    if (currentPageUrl) {
-      navigator.clipboard
-        .writeText(`action="${currentPageUrl}"`)
-        .then(() => {
-          console.log("Action URL copied to clipboard");
-        })
-        .catch((err) => {
-          console.error("Failed to copy action URL: ", err);
-        });
-    }
   });
 });
 
