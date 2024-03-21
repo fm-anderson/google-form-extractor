@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Extract Entries</title>
+    <link rel="stylesheet" href="popup.css" />
+    <script type="module" src="popup.js"></script>
+  </head>
+  <body class="popup-container">
+    <div class="intro">
+      <h1 class="title">Google Forms Extractor</h1>
+      <button class="btn btn-extract" id="extract">Extract Entries</button>
+    </div>
+
+    <div class="main">
+      <div id="results"></div>
+
+      <div class="copy-container">
+        <button class="btn hide" id="copy-results">Copy Fields</button>
+        <button class="btn hide" id="copy-action">Copy Action</button>
+      </div>
+
+      <div class="hide" id="copyStatus"></div>
+
+      <div class="validation hide" id="validation-message"></div>
+    </div>
+  </body>
+</html>
