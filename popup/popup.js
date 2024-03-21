@@ -1,10 +1,11 @@
-import {
-  copyResultsToClipboard,
-  updatePopupWithResults,
-  extractEntryNamesAndLabels,
-  hideElement,
-  showElement,
-} from "../utils/helper.js";
+import { hideElement, showElement } from "../utils/ui.js";
+import { copyResultsToClipboard, updatePopupResults } from "./popupHelpers.js";
+
+chrome.runtime.onMessage.addListener(function (message) {
+  if (message.entries) {
+    updatePopupResults(message.entries);
+  }
+});
 
 document.addEventListener("DOMContentLoaded", setupEventListeners);
 
@@ -61,24 +62,16 @@ function isValidGoogleFormsUrl(url) {
 
 function prepareUIForExtraction() {
   const copyActionButton = document.getElementById("copy-action");
+  const copyResultsButton = document.getElementById("copy-results");
   showElement(copyActionButton);
+  showElement(copyResultsButton);
 }
 
 function injectAndExecuteScript(tab) {
-  const copyResultsButton = document.getElementById("copy-results");
-
-  chrome.scripting.executeScript(
-    {
-      target: { tabId: tab.id },
-      function: extractEntryNamesAndLabels,
-    },
-    (injectionResults) => {
-      if (injectionResults && injectionResults.length > 0) {
-        updatePopupWithResults(injectionResults[0].result);
-        showElement(copyResultsButton);
-      }
-    }
-  );
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["/scripts/formExtractor.js"],
+  });
 }
 
 function displayInvalidUrlMessage() {
