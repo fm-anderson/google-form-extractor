@@ -6,7 +6,7 @@
   "permissions": ["activeTab", "scripting"],
   "host_permissions": ["https://docs.google.com/forms/*viewform*"],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "./popup/popup.html",
     "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",
@@ -15,7 +15,7 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "./background/background.js"
   },
   "icons": {
     "16": "images/icon16.png",
