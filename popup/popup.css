@@ -58,6 +58,10 @@ div {
   width: calc(100% - 20px);
 }
 
+.copy-example {
+  width: calc(100% - 20px);
+}
+
 .hide {
   display: none;
 }
