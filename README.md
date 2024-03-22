@@ -6,27 +6,30 @@ A Chrome extension that retrieves all the necessary data to connect a Google For
 
 ## Features
 
-- Extract input field names from a Google Form.
-- Display the extracted field names in a user-friendly format.
-- Copy the field names to the clipboard with a single click.
-- Simple and intuitive user interface with real-time feedback.
+- Extract Input Fields: Retrieve the names and labels of input fields from any Google Form.
+- User Interface Enhancements: Utilizes a dynamic UI to show and hide elements based on the user's actions.
+- Clipboard Integration: Copy field names, form action URL, or a HTML form example with your data.
 
 ## Installation
 
-1. Download the extension files or clone the repository.
+Since this extension is not available on the Chrome Web Store, it requires manual installation:
+
+1. Clone the repository to your local machine.
 2. Open Google Chrome and navigate to `chrome://extensions/`.
-3. Enable "Developer mode" at the top right.
+3. Enable "Developer mode" in the top-right corner.
 4. Click the "Load unpacked" button and select the extension directory.
-5. The extension should now be installed and will appear in your list of extensions.
+5. The extension is now installed and visible in your Chrome extensions list.
 
 ## Usage
 
-1. Open the Google Form you wish to connect with your custom HTML form.
+To use the extension, follow these steps:
+
+1. Navigate to the Google Form you want to integrate with your custom HTML form.
 2. Click on the extension icon in the Chrome toolbar.
-3. Press the "Extract Entries" button to retrieve the data.
+3. Click the "Extract Entries" button to retrieve all the form data.
 4. Once the data is displayed, a "Copy Results" button will appear.
-5. Click "Copy Results" to copy the data to your clipboard.
-6. A "Copied!" confirmation message will appear briefly under the button.
+5. Use the "Copy" buttons to copy the desired information (extracted fields, form action URL, or example form HTML) to your clipboard.
+6. If needed, click "Copy Form Example" to get a basic form HTML structure based on the extracted fields.
 
 ## Contributing
 
