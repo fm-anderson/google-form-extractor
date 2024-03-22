@@ -20,6 +20,16 @@ div {
   width: 280px;
 }
 
+.results {
+  width: 260px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border: 2px solid #0056b3;
+  border-radius: 0.25rem;
+}
+
 .copy-container {
   width: 260px;
   display: flex;

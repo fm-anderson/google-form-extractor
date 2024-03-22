@@ -96,9 +96,12 @@ function isValidGoogleFormsUrl(url) {
 }
 
 function prepareUIForExtraction() {
+  const resultsContainer = document.getElementById("results");
   const copyActionButton = document.getElementById("copy-action");
   const copyResultsButton = document.getElementById("copy-results");
   const copyFormButton = document.getElementById("copy-form");
+
+  showElement(resultsContainer);
   showElement(copyActionButton);
   showElement(copyResultsButton);
   showElement(copyFormButton);
